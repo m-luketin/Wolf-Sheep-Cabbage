@@ -9,16 +9,6 @@ typedef struct
 	int Boat;
 }State;
 
-
-
-typedef struct
-{
-	State gameState[100];
-	State *head;
-	State *tail;
-	int NumberOfElements;
-}Order;
-
 void PrintState(State currentGameState)
 {
 	printf("W S C B:");
@@ -50,39 +40,49 @@ int WinState(State state)
 	return (state.Wolf && state.Sheep && state.Cabbage);
 }
 
+int LoseState(State state)
+{
+	return((state.Sheep == state.Wolf && state.Sheep != state.Boat) ||
+		(state.Cabbage == state.Sheep && state.Cabbage != state.Boat));
+}
+
+void CreateChildren(State parentState, State nextState[4])
+{
+	for (int i = 0; i < 4; i++)
+		nextState[i] = parentState;
+
+	if (parentState.Wolf == parentState.Boat) {
+		nextState[0].Wolf = !parentState.Wolf;
+		nextState[0].Boat = !parentState.Boat;
+	}
+	if (parentState.Sheep == parentState.Boat) {
+		nextState[1].Sheep = !parentState.Sheep;
+		nextState[1].Boat = !parentState.Boat;
+	}
+	if (parentState.Cabbage == parentState.Boat) {
+		nextState[2].Cabbage = !parentState.Cabbage;
+		nextState[2].Boat = !parentState.Boat;
+	}
+	nextState[3].Boat = !parentState.Boat;
+}
+
 int GetMoves(State beginningState, int iteration)
 {
 	if (WinState(beginningState)) {
 		PrintState(beginningState);
 		return 1;
 	}
-	if (!iteration)
+	if (!iteration || LoseState(beginningState))
 		return 0;
 	
 	State nextState[4];
-	for (int i = 0; i < 4; i++)
-		nextState[i] = beginningState;
-
-	if (beginningState.Wolf == beginningState.Boat && beginningState.Sheep != beginningState.Cabbage) {
-		nextState[0].Wolf = !beginningState.Wolf;
-		nextState[0].Boat = !beginningState.Boat;
-	}
-	if (beginningState.Sheep == beginningState.Boat) {
-		nextState[1].Sheep = !beginningState.Sheep;
-		nextState[1].Boat = !beginningState.Boat;
-	}
-	if (beginningState.Cabbage == beginningState.Boat  && beginningState.Sheep != beginningState.Wolf) {
-		nextState[2].Cabbage = !beginningState.Cabbage;
-		nextState[2].Boat = !beginningState.Boat;
-	}
-	nextState[3].Boat = !beginningState.Boat;
+	CreateChildren(beginningState, nextState);
 
 	for (int i = 0; i < 4; i++) {
 		if (GetMoves(nextState[i], iteration - 1)) {
 			PrintState(beginningState);
 			return 1;
 		}
-		GetMoves(nextState[i], (iteration - 1));
 	}
 	
 	return 0;
@@ -91,7 +91,8 @@ int GetMoves(State beginningState, int iteration)
 void main()
 {
 	State startState = { 0 };
-	GetMoves(startState, 7);
+	for(int i = 0; !GetMoves(startState, i); i++)
+		GetMoves(startState, i);
 
 	system("pause");
 }
