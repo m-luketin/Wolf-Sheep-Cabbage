@@ -74,7 +74,7 @@ int GetMoves(State beginningState, int iteration)
 	}
 	if (!iteration || LoseState(beginningState))
 		return 0;
-	
+
 	State nextState[4];
 	CreateChildren(beginningState, nextState);
 
@@ -84,7 +84,7 @@ int GetMoves(State beginningState, int iteration)
 			return 1;
 		}
 	}
-	
+
 	return 0;
 }
 
@@ -95,43 +95,59 @@ typedef struct _QueueState
 	int sheep;
 	int cabbage;
 	int boat;
-	struct _QueueState* prevState;
+	int prevState;
 }QueueState;
 
 typedef struct
 {
-	QueueState stateList[1000];
+	QueueState stateList[10000];
 	int head;
 	int tail;
 	int filled;
 }Queue;
 
-void CreateQueueChildren(QueueState parentState, Queue queue)
+int CreateQueueChildren(QueueState parentState, Queue *queue)
 {
+	int numberOfChildren = 0;
 	if (parentState.wolf == parentState.boat) {
-		queue.stateList[queue.tail].wolf = !parentState.wolf;
-		queue.stateList[queue.tail].boat = !parentState.boat;
-		queue.stateList[queue.tail].prevState = &parentState;
-		queue.filled++;
-		queue.tail++;
+		queue->stateList[queue->tail].cabbage = parentState.cabbage;
+		queue->stateList[queue->tail].sheep = parentState.sheep;
+		queue->stateList[queue->tail].wolf = !parentState.wolf;
+		queue->stateList[queue->tail].boat = !parentState.boat;
+		queue->stateList[queue->tail].prevState = queue->head;
+		queue->filled++;
+		queue->tail++;
+		numberOfChildren++;
 	}
 	if (parentState.sheep == parentState.boat) {
-		queue.stateList[queue.tail].sheep = !parentState.sheep;
-		queue.stateList[queue.tail].boat = !parentState.boat;
-		queue.stateList[queue.tail].prevState = &parentState;
-		queue.tail++;
+		queue->stateList[queue->tail].wolf = parentState.wolf;
+		queue->stateList[queue->tail].cabbage = parentState.cabbage;
+		queue->stateList[queue->tail].sheep = !parentState.sheep;
+		queue->stateList[queue->tail].boat = !parentState.boat;
+		queue->stateList[queue->tail].prevState = queue->head;
+		queue->tail++;
+		queue->filled++;
+		numberOfChildren++;
 	}
 	if (parentState.cabbage == parentState.boat) {
-		queue.stateList[queue.tail].cabbage = !parentState.cabbage;
-		queue.stateList[queue.tail].boat = !parentState.boat;
-		queue.stateList[queue.tail].prevState = &parentState;
-		queue.filled++;
-		queue.tail++;
+		queue->stateList[queue->tail].wolf = parentState.wolf;
+		queue->stateList[queue->tail].sheep = parentState.sheep;
+		queue->stateList[queue->tail].cabbage = !parentState.cabbage;
+		queue->stateList[queue->tail].boat = !parentState.boat;
+		queue->stateList[queue->tail].prevState = queue->head;
+		queue->filled++;
+		queue->tail++;
+		numberOfChildren++;
 	}
-	queue.stateList[queue.tail].boat = !parentState.boat;
-	queue.stateList[queue.tail].prevState = &parentState;
-	queue.filled++;
-	queue.tail++;
+
+	queue->stateList[queue->tail].cabbage = parentState.cabbage;
+	queue->stateList[queue->tail].sheep = parentState.sheep;
+	queue->stateList[queue->tail].wolf = parentState.wolf;
+	queue->stateList[queue->tail].boat = !parentState.boat;
+	queue->stateList[queue->tail].prevState = queue->head;
+	queue->filled++;
+	queue->tail++;
+	numberOfChildren++;
 }
 
 void QueuePrintState(QueueState currentGameState)
@@ -179,37 +195,47 @@ int QueueStartState(QueueState state)
 void GetQueueMoves(Queue queue)
 {
 	QueueState tmpState;
-	int i = 0;
-	while (!QueueWinState(queue.stateList[i])) {
-		i++;
-	}
-	tmpState = queue.stateList[i];
-	while (!QueueStartState(tmpState))
+
+	while (queue.filled)
 	{
-		QueuePrintState(tmpState);
-		tmpState = *tmpState.prevState;
+		if (QueueLoseState(queue.stateList[queue.head])) {
+			queue.head++;
+			queue.filled--;
+			continue;
+		}
+
+		if (QueueWinState(queue.stateList[queue.head]))
+		{
+			QueuePrintState(queue.stateList[queue.head]);
+			while (!QueueStartState(queue.stateList[queue.head]))
+			{
+				queue.head = queue.stateList[queue.head].prevState;
+				QueuePrintState(queue.stateList[queue.head]);
+			}
+			return;
+		}
+		int children = CreateQueueChildren(queue.stateList[queue.head], &queue);
+
+		queue.head++;
+		queue.filled--;
 	}
 }
 
 void main()
 {
 	//prvi dio
-	
+
 	QueueState startState = { 0 };
 
 	//for(int i = 0; !GetMoves(startState, i); i++)
 		//GetMoves(startState, i);
-	
+
 	//drugi dio
 	Queue newQueue;
 	newQueue.head = 0;
 	newQueue.stateList[0] = startState;
 	newQueue.tail = 1;
 	newQueue.filled = 1;
-
-	for (; !QueueWinState(newQueue.stateList[newQueue.tail]); newQueue.head++) {
-		CreateQueueChildren(newQueue.stateList[newQueue.head], newQueue);
-	}
 
 	GetQueueMoves(newQueue);
 
