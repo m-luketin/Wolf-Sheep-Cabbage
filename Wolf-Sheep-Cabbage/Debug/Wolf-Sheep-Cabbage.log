@@ -1,0 +1,3 @@
+﻿  main.c
+c:\users\yaboi\desktop\wolf-sheep-cabbage\wolf-sheep-cabbage\main.c(125): warning C4013: 'QueueContainsState' undefined; assuming extern returning int
+  Wolf-Sheep-Cabbage.vcxproj -> C:\Users\YaBoi\Desktop\Wolf-Sheep-Cabbage\Debug\Wolf-Sheep-Cabbage.exe

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Wolf-Sheep-Cabbage", "Wolf-Sheep-Cabbage\Wolf-Sheep-Cabbage.vcxproj", "{918B039B-C452-4AA5-B363-BD26F8F10E3F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{918B039B-C452-4AA5-B363-BD26F8F10E3F}.Debug|x64.ActiveCfg = Debug|x64
+		{918B039B-C452-4AA5-B363-BD26F8F10E3F}.Debug|x64.Build.0 = Debug|x64
+		{918B039B-C452-4AA5-B363-BD26F8F10E3F}.Debug|x86.ActiveCfg = Debug|Win32
+		{918B039B-C452-4AA5-B363-BD26F8F10E3F}.Debug|x86.Build.0 = Debug|Win32
+		{918B039B-C452-4AA5-B363-BD26F8F10E3F}.Release|x64.ActiveCfg = Release|x64
+		{918B039B-C452-4AA5-B363-BD26F8F10E3F}.Release|x64.Build.0 = Release|x64
+		{918B039B-C452-4AA5-B363-BD26F8F10E3F}.Release|x86.ActiveCfg = Release|Win32
+		{918B039B-C452-4AA5-B363-BD26F8F10E3F}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E5B94049-237D-400B-B986-7280B07CE4A2}
+	EndGlobalSection
+EndGlobal
