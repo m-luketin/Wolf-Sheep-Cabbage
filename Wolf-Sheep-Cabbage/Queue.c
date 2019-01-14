@@ -59,29 +59,42 @@ void QueueCreateChildren(QueueState parentState, Queue *queue)
 
 void QueuePrintState(QueueState currentGameState)
 {
-	printf("Wolf-Sheep-Cabbage-Boat: ");
 	if (currentGameState.wolf)
-		printf("1");
+		printf("Wolf ");
 	else
-		printf("0");
-	printf("-");
-
+		printf("     ");
 	if (currentGameState.sheep)
-		printf("1");
+		printf("Sheep ");
 	else
-		printf("0");
-	printf("-");
-
+		printf("      ");
 	if (currentGameState.cabbage)
-		printf("1");
+		printf("Cabbage ");
 	else
-		printf("0");
-	printf("-");
-
+		printf("        ");
 	if (currentGameState.boat)
-		printf("1");
+		printf("Boat ");
 	else
-		printf("0");
+		printf("     ");
+
+	printf("~~~~~~~~~~~~~~~~~~~~~~~ ");
+
+	if (!currentGameState.wolf)
+		printf("Wolf ");
+	else
+		printf("     ");
+	if (!currentGameState.sheep)
+		printf("Sheep ");
+	else
+		printf("      ");
+	if (!currentGameState.cabbage)
+		printf("Cabbage ");
+	else
+		printf("        ");
+	if (!currentGameState.boat)
+		printf("Boat ");
+	else
+		printf("     ");
+
 	printf("\n");
 }
 
@@ -115,6 +128,7 @@ void QueueGetMoves(Queue queue)
 {
 	while (1)
 	{
+		
 		if (QueueLoseState(queue.stateList[queue.head])) {
 			queue.head++;
 			continue;

@@ -2,31 +2,42 @@
 
 void PrintState(State currentGameState)
 {
-	printf("Wolf-Sheep-Cabbage-Boat: ");
 	if (currentGameState.Wolf)
-		printf("1");
+		printf("Wolf ");
 	else
-		printf("0");
-	printf("-");
-
+		printf("     ");
 	if (currentGameState.Sheep)
-		printf("1");
+		printf("Sheep ");
 	else
-		printf("0");
-	printf("-");
-
-
+		printf("      ");
 	if (currentGameState.Cabbage)
-		printf("1");
+		printf("Cabbage ");
 	else
-		printf("0");
-	printf("-");
-
-
+		printf("        ");
 	if (currentGameState.Boat)
-		printf("1");
+		printf("Boat ");
 	else
-		printf("0");
+		printf("     ");
+
+	printf("~~~~~~~~~~~~~~~~~~~~~~~ ");
+
+	if (!currentGameState.Wolf)
+		printf("Wolf ");
+	else
+		printf("     ");
+	if (!currentGameState.Sheep)
+		printf("Sheep ");
+	else
+		printf("      ");
+	if (!currentGameState.Cabbage)
+		printf("Cabbage ");
+	else
+		printf("        ");
+	if (!currentGameState.Boat)
+		printf("Boat ");
+	else
+		printf("     ");
+
 	printf("\n");
 }
 

@@ -1,7 +1,7 @@
 ﻿  Queue.c
-c:\users\yaboi\desktop\wolf-sheep-cabbage\wolf-sheep-cabbage\queue.c(62): warning C4013: 'printf' undefined; assuming extern returning int
+c:\users\yaboi\desktop\wolf-sheep-cabbage\wolf-sheep-cabbage\queue.c(63): warning C4013: 'printf' undefined; assuming extern returning int
   Recursion.c
-c:\users\yaboi\desktop\wolf-sheep-cabbage\wolf-sheep-cabbage\recursion.c(5): warning C4013: 'printf' undefined; assuming extern returning int
-  main.c
+c:\users\yaboi\desktop\wolf-sheep-cabbage\wolf-sheep-cabbage\recursion.c(6): warning C4013: 'printf' undefined; assuming extern returning int
   Generating Code...
+  LINK : C:\Users\YaBoi\Desktop\Wolf-Sheep-Cabbage\x64\Debug\Wolf-Sheep-Cabbage.exe not found or not built by the last incremental link; performing full link
   Wolf-Sheep-Cabbage.vcxproj -> C:\Users\YaBoi\Desktop\Wolf-Sheep-Cabbage\x64\Debug\Wolf-Sheep-Cabbage.exe

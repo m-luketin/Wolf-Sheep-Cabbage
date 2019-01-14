@@ -7,6 +7,7 @@ void main()
 {
 	//Recursion
 	State startState = { 0 };
+	printf("                               Recursion\n");
 
 	for(int i = 0; !GetMoves(startState, i); i++)
 		GetMoves(startState, i);
@@ -20,6 +21,7 @@ void main()
 	newQueue.tail = 1;
 	newQueue.filled = 1;
 
+	printf("                                 Queue\n");
 	QueueGetMoves(newQueue);
 
 	system("pause");
