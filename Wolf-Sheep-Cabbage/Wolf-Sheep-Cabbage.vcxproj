@@ -116,6 +116,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.c" />
+    <ClCompile Include="Queue.c" />
+    <ClCompile Include="Recursion.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="QueueHeader.h" />
+    <ClInclude Include="RecursionHeader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
